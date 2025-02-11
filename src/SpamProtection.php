@@ -156,7 +156,7 @@ class SpamProtection
             throw new \Exception("API Check Unsuccessful");
         }
 
-        if ($json->success == 1 && $json->{$type}->appears == 1) {
+        if ($json->success == 1 && $json?->{$type}?->appears == 1) {
             // Frequency Threshold check
             if ($json->{$type}->frequency < $this->frequencyThreshold) {
                 return false;
