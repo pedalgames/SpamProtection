@@ -156,6 +156,9 @@ class SpamProtection
             throw new \Exception("API Check Unsuccessful");
         }
 
+        if ($json->success == 1 && (!isset($json?->{$type}) || !isset($json?->{$type}?->appears))) {
+          error_log('Not isset appears:' . json_encode($json));
+        } else
         if ($json->success == 1 && $json?->{$type}?->appears == 1) {
             // Frequency Threshold check
             if ($json->{$type}->frequency < $this->frequencyThreshold) {
